@@ -6,11 +6,10 @@ function ContactLayout({
     children: React.ReactNode
 }) {
     return (
-        <html>
-            <head />
+        <>
             <Script src="https://js.hcaptcha.com/1/api.js" async defer />
-            <body>{children}</body>
-        </html>
+            {children}
+        </>
     )
 }
 

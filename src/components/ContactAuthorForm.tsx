@@ -5,12 +5,19 @@ import { ArrowUpRightIcon } from "@heroicons/react/24/solid"
 import validator from "validator"
 type Props = {}
 
+interface FormValues {
+    name: string
+    email: string
+    subject: string
+    message: string
+}
+
 function ContactAuthorForm({ }: Props) {
     const {
         register,
         handleSubmit,
         formState: { errors }
-    } = useForm<FormData>()
+    } = useForm<FormValues>()
     const onSubmit = handleSubmit(async (data) => {
         await fetch("/api/contact", {
             method: "POST", body: JSON.stringify(data), headers: new Headers({
