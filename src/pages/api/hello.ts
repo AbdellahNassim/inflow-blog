@@ -1,13 +1,8 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import type { NextApiRequest, NextApiResponse } from 'next'
+import { NextApiHandler } from "next";
 
-type Data = {
-  name: string
+export const handler : NextApiHandler = async (req, res) => {
+    console.log(process.env.HCAPTCHA_SECRET)
+    res.send({message: "Hello World"})
 }
 
-export default function handler(
-  req: NextApiRequest,
-  res: NextApiResponse<Data>
-) {
-  res.status(200).json({ name: 'John Doe' })
-}
+export default handler
