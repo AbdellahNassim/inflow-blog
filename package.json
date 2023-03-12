@@ -11,6 +11,7 @@
   "dependencies": {
     "@heroicons/react": "^2.0.15",
     "@hookform/error-message": "^2.0.1",
+    "@next-auth/firebase-adapter": "^2.0.1",
     "@next/font": "13.1.6",
     "@portabletext/react": "^2.0.1",
     "@sanity/image-url": "^1.0.2",
@@ -22,7 +23,9 @@
     "@types/react-dom": "18.0.11",
     "eslint": "8.34.0",
     "eslint-config-next": "13.1.6",
+    "firebase-admin": "^11.5.0",
     "next": "13.1.6",
+    "next-auth": "^4.20.1",
     "next-hcaptcha": "^1.4.3",
     "next-sanity": "^4.1.5",
     "react": "18.2.0",

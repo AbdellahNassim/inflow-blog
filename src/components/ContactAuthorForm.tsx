@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form"
 import { ErrorMessage } from '@hookform/error-message';
 import { ArrowUpRightIcon } from "@heroicons/react/24/solid"
 import validator from "validator"
+import { useSession } from "next-auth/react";
 type Props = {}
 
 interface FormValues {
@@ -13,23 +14,30 @@ interface FormValues {
 }
 
 function ContactAuthorForm({ }: Props) {
+    const {data : session} = useSession()
     const {
         register,
-        handleSubmit,
         formState: { errors }
-    } = useForm<FormValues>()
-    const onSubmit = handleSubmit(async (data) => {
-        await fetch("/api/contact", {
-            method: "POST", body: JSON.stringify(data), headers: new Headers({
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-            }),
-        })
-    })
+    } = useForm<FormValues>({defaultValues : {
+        name : session?.user?.name || "",
+        email : session?.user?.email || ""
+    }})
+    // const onSubmit = handleSubmit(async (data) => {
+    //     const res = await fetch("/api/contact", {
+    //         method: "POST", body: JSON.stringify(data), headers: new Headers({
+    //             'Content-Type': 'application/json',
+    //             Accept: 'application/json',
+    //         }),
+    //     })
+    //     const json = await res.json()
+    //     if(json?.success === false) {
+    //         alert(json?.message)
+    //     }
+    // })
     const handleEmailValidation = (email: string) => validator.isEmail(email)
     return (
         <div className="my-10 px-4 max-w-3xl mx-auto">
-            <form className="flex flex-col space-y-4" onSubmit={onSubmit}>
+            <form className="flex flex-col space-y-4" method="POST" action="/api/contact">
                 <div className="flex flex-col space-y-2 relative">
                     <label className="absolute z-10 border-white bg-white -top-1 border-x-4 left-3 focus:text-[#E7E247]" htmlFor="name">Name</label>
                     <input placeholder="Joe Smith" type="text" {...register("name", { required: { value: true, message: "You must specify your name" } })} className="border-2 border-gray-300 focus:border-[#E7E247]  p-2 rounded-md focus:outline-[#E7E247] hover:outline-[#E7E247] transition-colors duration-200 ease-in" />
