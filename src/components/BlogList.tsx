@@ -9,8 +9,8 @@ type Props = {
 function BlogList({ posts }: Props) {
     //console.log("POSTS", posts.length)
     return (
-        <div>
-            <hr className="border-[#E7E247] my-10" />
+        <div className="mt-24">
+            {/* <hr className="border-[#E7E247] my-10" /> */}
             <div className="grid grid-cols-1 md:grid-cols-2 px-10 gap-10 gap-y-16 pb-24">
                 {/**Posts */}
                 {posts.map((post) => (

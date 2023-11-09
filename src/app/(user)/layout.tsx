@@ -20,12 +20,20 @@ export default function RootLayout({
       <head />
 
       <SessionProvider >
-        <body className={`${rubik.className} max-w-7xl mx-auto`}>
+        <body className={`${rubik.className}`}>
+          
+          <div className='max-w-7xl mx-auto'>
           <Header />
           <Banner />
-          {children}
-
+            {children}
+          </div>
+          <footer className='bg-slate-900 text-white p-10 text-center font-bold'>
+            <p>
+              2023 © All rights reserved to Abdellah Nassim MERIDJA
+            </p>
+          </footer>
         </body>
+
       </SessionProvider>
     </html>
   )
