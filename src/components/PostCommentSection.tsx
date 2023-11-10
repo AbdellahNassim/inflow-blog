@@ -72,7 +72,7 @@ const Comment = ({
         </div>
         <div>
           <p className="text-xs text-slate-400">
-            {new Date(comment.createdAt).toLocaleString()}
+            {new Date(comment.createdAt.seconds * 1000).toLocaleString()}
           </p>
         </div>
       </div>
@@ -122,7 +122,7 @@ const Comments = ({ slug, session }: { slug: string; session: Session }) => {
           const { newComment } = data;
           if (!newComment) return;
 
-          createNewComment(session.user?.email, newComment, slug);
+          createNewComment(session.user?.email!, newComment, slug);
         })}
       >
         <div>
@@ -135,7 +135,7 @@ const Comments = ({ slug, session }: { slug: string; session: Session }) => {
           />
         </div>
         <div className="relative ml-4 w-full">
-          <p className="ml-2 mb-2 font-bold">{session.user?.name}</p>
+          <p className="mb-2 ml-2 font-bold">{session.user?.name}</p>
           <input
             {...register("newComment")}
             type="text"
