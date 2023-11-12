@@ -9,7 +9,7 @@ const dancing_script = Dancing_Script({ subsets: ["latin"] });
 function Header({}: Props) {
   const { data: session } = useSession();
   return (
-    <header className="sticky top-0 left-0 z-50 flex items-center justify-between space-x-2 rounded-b-2xl bg-slate-50 bg-opacity-20 px-10 py-2 font-bold drop-shadow-lg backdrop-blur-md">
+    <header className="sticky left-0 top-0 z-50 flex items-center justify-between space-x-2 rounded-b-2xl bg-slate-50 bg-opacity-20 px-2 py-2 font-bold drop-shadow-lg backdrop-blur-md lg:px-10">
       <div>
         <Link href="/" className="flex items-center gap-2">
           <span className={`${dancing_script.className} text-4xl font-bold`}>
@@ -28,7 +28,11 @@ function Header({}: Props) {
         <div className="rounded-lg bg-[#E7E247] p-2">
           {session ? (
             <>
-              <div className="flex items-center gap-1">
+              <button
+                title="signout"
+                className="flex items-center gap-1 text-slate-900"
+                onClick={(e) => signOut()}
+              >
                 <Image
                   className="rounded-full"
                   src={session.user?.image!}
@@ -36,14 +40,8 @@ function Header({}: Props) {
                   width={30}
                   height={30}
                 />
-                <button
-                  title="signout"
-                  className="text-slate-900"
-                  onClick={(e) => signOut()}
-                >
-                  <ArrowRightOnRectangleIcon className="w-6" />
-                </button>
-              </div>
+                <ArrowRightOnRectangleIcon className="hidden w-6 md:block" />
+              </button>
             </>
           ) : (
             <button
@@ -52,7 +50,7 @@ function Header({}: Props) {
               onClick={(e) => signIn()}
             >
               {" "}
-              <p>Sign in</p>
+              <p className="hidden md:block">Sign in</p>
               <ArrowRightOnRectangleIcon className="w-6" />
             </button>
           )}
