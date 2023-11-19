@@ -19,8 +19,13 @@ const query = groq`
 //const rubik = Rubik({ subsets: ['latin'] })
 
 export const revalidate = 60;
-
-export default async function Home() {
+type Props = {
+  searchParams: {
+    search?: string;
+    categories?: string;
+  };
+};
+export default async function Home({ searchParams }: Props) {
   if (previewData()) {
     return (
       <PreviewSuspense
@@ -37,7 +42,7 @@ export default async function Home() {
   const posts = await client.fetch(query);
   return (
     <main className="min-h-screen">
-      <BlogList posts={posts} />
+      <BlogList posts={posts} searchParams={searchParams} />
     </main>
   );
 }
